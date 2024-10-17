@@ -1,0 +1,39 @@
+public class shirinda nyiko{
+
+    public static int findProductIndex(int[] productIDs, int targetID) {
+        int Left = 0;
+        int Right = productIDs.length - 1;
+
+        while ( Left <= Right) {
+            int mid = Left + (Right - Left) / 2;
+
+            if (productIDs[mid] == targetID) {
+                return mid;
+            }
+
+            if (productIDs[Left] <= productIDs[mid]) {
+                if (targetID >= productIDs[Left] && targetID < productIDs[mid]) {
+                    Right = mid - 1;
+                } else {
+                    Left = mid + 1;
+                }
+            } else {
+                if (targetID > productIDs[mid] && targetID <= productIDs[Right]) {
+                    Left = mid + 1;
+                } else {
+                    Right = mid - 1;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] productIDs = {104, 105, 106, 107, 101, 102, 103};
+        int targetID = 103;
+        int index;
+        index = findProductIndex(productIDs, targetID);
+        System.out.println("Product ID " + targetID + " found at index: ");
+    }
+}
